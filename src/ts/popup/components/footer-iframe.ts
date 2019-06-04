@@ -5,7 +5,7 @@ import domainMsg from './domain-msg';
 
 @Component({
   template:
-  `<div class='footer-iframe'>
+  `<div class='footer'>
       <domain-msg :is-enabled="enabled" :domain-nm="domainNm"></domain-msg>
       <switch-input :is-enabled="enabled" @toggle:switch="toggle"></switch-input>
    </div>`,
@@ -25,4 +25,4 @@ import domainMsg from './domain-msg';
     }
   }
 })
-export default class footerIframe extends Vue {}
+export default class footer extends Vue {}

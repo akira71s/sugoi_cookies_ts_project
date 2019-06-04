@@ -8,9 +8,6 @@
     "scripts": ["src/dist/bg.bundle.js"],
     "persistant":false
   },
-  "sandbox": {
-    "pages": ["src/html/iframe.html"]
-  },
   "content_scripts": [
     {
       "matches": [ "<all_urls>"],

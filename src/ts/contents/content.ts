@@ -1,3 +1,4 @@
+import * as functions from '.././functions';
 import {STYLE_ESCAPE,STYLE_BOLD} from "./const";
 /** 
  * @author Akira Sakaguchi <akira.s7171@gmail.com>
@@ -30,7 +31,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
      case 'toggle':
      // request.value = shouldEnabled
      toggle_(request.value);
-     console.log(request);
      reload_(url, request.gclidVal);
      break;
 
@@ -94,31 +94,15 @@ function getDomains(domain){
  * @param {?string} url;
  */
 function reload_(url?:string,inputVal?:string):void{
+  functions.getUrlWithoutGclid
   if(inputVal){
+    url = functions.getUrlWithoutGclid(url);
     url.includes('?')?
       window.location.href = url+'&gclid='+inputVal:
       window.location.href = url+'?gclid='+inputVal;
   } else {
   url?
    window.location.href = url:
-   window.location.href = getUrlWithoutGclid(window.location.href);
+   window.location.href = functions.getUrlWithoutGclid(window.location.href);
   }
-};
-
-/** 
- * from popup.js and send the value back to it
- * @return {string} url - url without gclid
- * @param {string} url - url with or without gclid
- */
-function getUrlWithoutGclid (url) {
-  if(url.includes('?gclid')){
-    url = url.substring(url.indexOf('?gclid'),0);
-  } else if(url.includes('&gclid')) {
-    url = url.substring(url.indexOf('&gclid'),0);
-  } else if (url.includes('?_gl')){
-    url = url.substring(url.indexOf('?_gl'),0);
-  } else if (url.includes('&_gl')){
-    url = url.substring(url.indexOf('&_gl'),0);
-  }
-  return url;
 };

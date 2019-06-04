@@ -7,7 +7,7 @@ const INSTRUCTION = "To Enable It & Get Started, Click =>";
 @Component({
   template:
   `<span id="domain-msg">
-      <span class="domain-msg">{{msg}}</span>
+      <span class="domain-msg" v-if="!enabled">{{msg}}</span>
       <br/>
       <span id="domain-name" v-if="enabled">{{domain}}</span>
   </span>`,

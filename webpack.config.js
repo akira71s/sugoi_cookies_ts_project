@@ -5,8 +5,7 @@ module.exports = {
   
     // メインとなるJavaScriptファイル（エントリーポイント）
     entry: {//"./src/ts/app.ts",
-      'dist/iframe': './src/ts/iframe/app.ts',
-      'dist/popup': './src/ts/popup/popup.ts',
+      'dist/app': './src/ts/popup/app.ts',
       'dist/bg': './src/ts/bg/background.ts',
       'dist/contents': './src/ts/contents/content.ts',
       'dist/writers': './src/ts/contents/writers.ts'
