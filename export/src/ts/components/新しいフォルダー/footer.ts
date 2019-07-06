@@ -25,4 +25,4 @@ import domainMsg from './domain-msg';
     }
   }
 })
-export default class footer extends Vue {}
+export default class footerIframe extends Vue {}

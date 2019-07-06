@@ -2,6 +2,10 @@
  * @author Akira Sakaguchi <akira.s7171@gmail.com>
  * A list of constants  
  */
+
+// @ts-ignore
+import manifestJSON from '../../manifest.json';
+
 const STYLE_HIGHLIGHT:string ='font-weight: bold;background-color:black;color:#fff';
 const STYLE_BOLD ='font-weight: bold';
 const STYLE_BLUE ='color: blue';
@@ -20,7 +24,7 @@ const STYLES_BOLD_WHITE_BG_GREEN = [STYLE_BOLD, STYLE_WHITE, STYLE_BG_GREEN];
 const STYLES_BOLD_WHITE_BG_BLUE = [STYLE_BOLD, STYLE_WHITE, STYLE_BG_BLUE];
 const STYLES_BOLD_WHITE_BG_ORANGE = [STYLE_BOLD, STYLE_WHITE, STYLE_BG_ORANGE];
 const STYLES_BOLD_WHITE_BG_GRAY = [STYLE_BOLD, STYLE_WHITE, STYLE_BG_GRAY];
-const VERSION = 'v4.2.0';
+const VERSION = 'v'+ manifestJSON.version;
 
 /** 
  * Google Ads Cookies usually consists of 3 parts: conversionID, timeStamp, and UUID 

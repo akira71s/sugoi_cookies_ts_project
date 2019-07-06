@@ -1,10 +1,14 @@
 import Vue from 'vue';
-import customBtn from './components/custom-button';
-import gclidInput from './components/gclid-input';
-import cookieMsg from './components/cookie-msg';
-import footer from './components/footer';
-import {VERSION} from '../contents/const';
-import * as functions from '.././functions';
+// @ts-ignore
+import CustomBtn from './components/CustomBtn';
+// @ts-ignore
+import GclidInput from './components/GclidInput';
+// @ts-ignore
+import cookieMsg from './components/CookieMsg';
+// @ts-ignore
+import footer from './components/Footer';
+import {VERSION} from './const';
+import * as functions from './functions';
 
 const PARENT_URL = "*";
 const NO_COOKIE_MSG='NO COOKIE FOUND';
@@ -33,28 +37,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       app.$data.gacVal = cookieValue.length ===0 ?'':cookieValue;
      } else if (cookieName.includes('gclid')){
       app.$data.gclidVal = cookieValue.length ===0 ?'':cookieValue;
+      if(!app.$data.gclidVal&&window.localStorage.getItem('gclid')){
+        app.$data.gclidVal = window.localStorage.getItem('gclid');
+      }
      }
   } 
   return true;
 });
 
-// /** 
-//  * Listening message from content.js & writers.js
-//  * once messages received, post message to the iframe window
-//  */
-// chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-//   let msg = request.message;
-//   if(msg==='sendDomainName'){
-//     const $iFrame:HTMLIFrameElement = document.getElementById('main-iframe') as HTMLIFrameElement;
-//     $iFrame.contentWindow.postMessage(JSON.stringify({type:'sendDomainName', 'domainName':request.domainName}),'*');  
-//     console.log('domain ', request.domainName);
-//   } if(msg==='sendCookie'){
-//     const $iFrame:HTMLIFrameElement = document.getElementById('main-iframe') as HTMLIFrameElement;
-//     $iFrame.contentWindow.postMessage(JSON.stringify({type:'sendCookie', 
-//       'cookieName':request.cookieName,'cookieValue':request.cookieValue}),'*');  
-//    } 
-//    return true;
-// });
+// @reload="reload"
+// @clear:cookies="clear"
+// @clear-all:cookies="clearAll" 
 
 const app = new Vue({
   el: '#app',
@@ -63,17 +56,17 @@ const app = new Vue({
     <div class="second-line">
         <gclid-input ref="gclidInput" @update:value="updateInputVal" @reload="reload"></gclid-input>
         <custom-btn parentClass="go-parent" parentId="go-parent" btnClass="btn-primary"
-                btnId="go" btnLabel="Go!" @reload="reload" />
+                btnId="go" btnLabel="Go!" @click="reload">
         </custom-btn>
     </div>
     <div class="third-line" id="clear-parent">
         <custom-btn parentClass="clear-parent" parentId="clear-parent" btnClass="btn-warning"
-                   btnId="clear" btnLabel="Clear GoogleAds-related Cookies" @clear:cookies="clear">
+                   btnId="clear" btnLabel="Clear GoogleAds-related Cookies" @click="clear">
         </custom-btn>
     </div>
     <div class="forth-line" id="clear-all-parent">
         <custom-btn parentClass="clear-all-parent" parentId="clear-all-parent" btnClass="btn-danger"
-                       btnId="clear-all" btnLabel="Clear All Cookies of This Domain" @clear-all:cookies="clearAll"/>
+                       btnId="clear-all" btnLabel="Clear All Cookies of This Domain" @click="clearAll">
         </custom-btn>
     </div>
     <div class="msgs">
@@ -90,8 +83,8 @@ const app = new Vue({
     <footer-iframe ref="footer" :is-enabled="isEnabled" :domain-nm="domainNm" @toggle="toggle"></footer-iframe>
     </span>`,
   components :{
-    'custom-btn' : customBtn,
-    'gclid-input' : gclidInput,
+    'custom-btn' : CustomBtn,
+    'gclid-input' : GclidInput,
     'cookie-msg': cookieMsg,
     'footer-iframe':footer
   },
@@ -178,15 +171,6 @@ const app = new Vue({
       this.getDomainName();
       this.getCookies();
     }
-    // getCookies(){
-    //   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    //     const tabID = tabs[0].id;
-    //     if (tabID) {
-    //       chrome.tabs.sendMessage(tabID, {message: 'getCookies'}, ()=>{});
-    //     }
-    //     return true; 
-    //   })
-    // }
   },
   created:function(){
     this.start_();

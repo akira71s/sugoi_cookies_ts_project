@@ -1,3 +1,32 @@
+<template>
+  <label id="switch-input" class="switch">
+    <input id="toggle" @change="toggle" type="checkbox">
+    <span  class="slider round"></span>
+  </label>
+</template>
+
+<script>
+export default {
+  props:{
+    enabled:{
+      type:Boolean,
+      required: false
+    }
+  },
+  methods:{
+    toggle(e){
+      const target = e.target;
+      if(target['tagName'] !== 'INPUT'){
+        return;
+      }
+      const isChecked = target['checked'];
+      this.$emit('toggle:switch',isChecked);
+    }
+  }
+}
+</script>
+
+<style scoped>
 /* FOR TOGGLE BUTTON */
 .switch{
     margin-left:36px;
@@ -68,3 +97,4 @@
   .slider.round:before {
     border-radius: 50%;
   }
+</style>
