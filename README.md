@@ -90,3 +90,7 @@ By hitting the yellow botton, you can clear _gcl_aw & _gac Cookies in the domain
 By hitting the red botton, you can clear all the cookies you have in the browser.  
 
 (クロームブラウザのすべてのクッキーを削除します。)  
+
+
+TODO: fix "cookies changed after window loaded"
+TODO: fix babel & type ignore
