@@ -6,6 +6,9 @@ Chrome extension for checking Cookies needed for Google Ads Conversion tracking
 (Google広告のコンバージョン計測に必要なクッキーの計測・テストを行う、Google Chromブラウザの拡張機能(プラグイン)です。)
 
 
+<img width="640" alt="sugoi" src="https://user-images.githubusercontent.com/40524432/60825562-894f5480-a1de-11e9-8448-393bc4d4ba69.PNG">
+
+
 <img width="827" alt="demo" src="https://user-images.githubusercontent.com/40524432/52161436-d7c46880-26ff-11e9-9da6-2be74a386dae.PNG">
 
 ## Outline(概要):
