@@ -1,8 +1,7 @@
-
+export { };
 /**
  * @author Akira Sakaguchi <akira.s7171@gmail.com>  
  */
-"use strict";
 let cache_ =[];
 
 /**

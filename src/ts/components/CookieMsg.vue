@@ -51,5 +51,6 @@ export default {
 }
 .cookie-value{
   font-weight: bold; 
+  word-wrap: break-word;
 }
 </style>

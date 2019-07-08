@@ -93,7 +93,7 @@
 /*! exports provided: manifest_version, version, name, short_name, description, background, content_scripts, browser_action, icons, permissions, content_security_policy, default */
 /***/ (function(module) {
 
-eval("module.exports = {\"manifest_version\":2,\"version\":\"4.2.0\",\"name\":\"SUGOI!Cookies: gclid tester for Google Ads\",\"short_name\":\"S Cookies: gclid tester\",\"description\":\"Check if you have cookies that are needed for Google Ads conversion tracking by gclid test\",\"background\":{\"scripts\":[\"src/dist/bg.bundle.js\"],\"persistant\":false},\"content_scripts\":[{\"matches\":[\"<all_urls>\"],\"js\":[\"src/dist/contents.bundle.js\",\"src/dist/writers.bundle.js\"]}],\"browser_action\":{\"name\":\"turn on / off\",\"default_title\":\"SUGOI! Cokkies\",\"default_popup\":\"src/html/popup.html\",\"default_icon\":\"icon/s128.png\"},\"icons\":{\"16\":\"icon/s16.png\",\"48\":\"icon/s48.png\",\"128\":\"icon/s128.png\"},\"permissions\":[\"webRequest\",\"activeTab\",\"cookies\",\"<all_urls>\"],\"content_security_policy\":\"script-src 'self' 'unsafe-eval' https://ajax.googleapis.com/ ; object-src 'self'\"};\n\n//# sourceURL=webpack:///./manifest.json?");
+eval("module.exports = {\"manifest_version\":2,\"version\":\"4.2.5\",\"name\":\"SUGOI!Cookies: gclid tester for Google Ads\",\"short_name\":\"S Cookies: gclid tester\",\"description\":\"Check if you have cookies that are needed for Google Ads conversion tracking by gclid test\",\"background\":{\"scripts\":[\"src/dist/bg.bundle.js\"],\"persistant\":false},\"content_scripts\":[{\"matches\":[\"<all_urls>\"],\"js\":[\"src/dist/contents.bundle.js\",\"src/dist/writers.bundle.js\"]}],\"browser_action\":{\"name\":\"turn on / off\",\"default_title\":\"SUGOI! Cokkies\",\"default_popup\":\"src/html/popup.html\",\"default_icon\":\"icon/s128.png\"},\"icons\":{\"16\":\"icon/s16.png\",\"48\":\"icon/s48.png\",\"128\":\"icon/s128.png\"},\"permissions\":[\"webRequest\",\"activeTab\",\"cookies\",\"<all_urls>\"],\"content_security_policy\":\"script-src 'self' 'unsafe-eval' https://ajax.googleapis.com/ ; object-src 'self'\"};\n\n//# sourceURL=webpack:///./manifest.json?");
 
 /***/ }),
 
@@ -104,7 +104,7 @@ eval("module.exports = {\"manifest_version\":2,\"version\":\"4.2.0\",\"name\":\"
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\\n*[data-v-8b927f2a] {\\r\\n  font-size: 18px;\\n}\\n.cookie-value[data-v-8b927f2a]{\\r\\n  font-weight: bold;\\n}\\r\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./src/ts/components/CookieMsg.vue?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
+eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\\n*[data-v-8b927f2a] {\\r\\n  font-size: 18px;\\n}\\n.cookie-value[data-v-8b927f2a]{\\r\\n  font-weight: bold; \\r\\n  word-wrap: break-word;\\n}\\r\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./src/ts/components/CookieMsg.vue?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
