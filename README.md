@@ -94,3 +94,5 @@ By hitting the red botton, you can clear all the cookies you have in the browser
 
 TODO: fix "cookies changed after window loaded"
 TODO: fix babel & type ignore
+TODO: fix "turn on"
+TODO: fix "switch always off"
