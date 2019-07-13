@@ -95,3 +95,4 @@ TODO: fix "cookies changed after window loaded" => array cookie vals
 TODO: fix babel & type ignore
 TODO: fix "switch input v-model" error 
 TODO: deal with fragment in URL => content.ts : reload_, functions.getUrlWithoutGclid
+TODO: nuxt js & vuex
