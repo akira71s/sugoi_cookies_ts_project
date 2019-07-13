@@ -95,3 +95,4 @@ By hitting the red botton, you can clear all the cookies you have in the browser
 TODO: fix "cookies changed after window loaded"
 TODO: fix babel & type ignore
 TODO: fix "switch input v-model" error 
+TODO: deal with fragment in URL => content.ts : reload_, functions.getUrlWithoutGclid
