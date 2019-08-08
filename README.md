@@ -1,6 +1,7 @@
 @author Akira Sakaguchi <akira.s7171@gmail.com>
 
 # sugoi_cookies (Vue.js + TypeScript + Webpack)
+https://chrome.google.com/webstore/detail/sugoicookies-gclid-tester/oidgodfancakeifokbiocnnlfoocmbpd
 Chrome extension for checking Cookies needed for Google Ads Conversion tracking
 
 (Google広告のコンバージョン計測に必要なクッキーの計測・テストを行う、Google Chromブラウザの拡張機能(プラグイン)です。)
@@ -23,24 +24,24 @@ but you don't need to do anymore. What you need to do is just check the console!
 ## TS files (TypeScript ファイル):
 
 ### Commons & main 
-#### app.ts (main file)
-#### const.ts (common)
-#### functions.ts (common)
+#### - app.ts (main file)
+#### - const.ts (common)
+#### - functions.ts (common)
 
 ### Contents (files in charge of the page itself)
-#### content.ts
-#### writer.ts
+#### - content.ts
+#### - writer.ts
 
 ### Components
-#### CoookieMsg.vue
-#### CustomBtn.vue
-#### DomainMsg.vue
-#### Footer.vue
-#### GclidInput.vue
-#### SwitchInput.vue
+#### - CoookieMsg.vue
+#### - CustomBtn.vue
+#### - DomainMsg.vue
+#### - Footer.vue
+#### - GclidInput.vue
+#### - SwitchInput.vue
 
 ### Background (calling APIs related to cookies)
-#### background.ts
+#### - background.ts
  - execute clearCookies(chrome.cookies API), then send a message to content JS & writer JS
  
  
