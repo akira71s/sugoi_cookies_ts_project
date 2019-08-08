@@ -1,7 +1,8 @@
 <template>
   <div class='footer'>
-      <domain-msg :is-enabled="enabled" :domain-nm="domainNm"></domain-msg>
-      <switch-input :is-enabled="enabled" @toggle:switch="toggle"></switch-input>
+      <!-- :is-enabled="enabled" 渡すのは computedの中の enabled-->
+      <domain-msg :is-enabled="isEnabled" :domain-nm="domainNm"></domain-msg>
+      <switch-input :is-enabled="isEnabled" @toggle:switch="toggle"></switch-input>
   </div>
 </template>
 
@@ -31,6 +32,7 @@ export default {
   },
   computed: {
     enabled: function () {
+      console.log('computed Footer.VUE:', this.isEnabled);
       return this.isEnabled;
     }
   }

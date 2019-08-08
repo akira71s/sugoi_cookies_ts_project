@@ -31,7 +31,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
      case 'toggle':
      // request.value = shouldEnabled
      toggle_(request.value);
-     reload_(url, request.gclidVal);
+     const shouldEnabled = request.value;
+       shouldEnabled ?
+       reload_(url, request.gclidVal):
+       reload_(null, '');
      break;
 
      case 'getUrl':
@@ -101,7 +104,7 @@ function reload_(url?:string,inputVal?:string):void{
       window.location.href = url+'&gclid='+inputVal:
       window.location.href = url+'?gclid='+inputVal;
   } else {
-  url?
+  url ?
    window.location.href = url:
    window.location.href = functions.getUrlWithoutGclid(window.location.href);
   }
