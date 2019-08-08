@@ -2,6 +2,7 @@
 
 # sugoi_cookies (Vue.js + TypeScript + Webpack)
 https://chrome.google.com/webstore/detail/sugoicookies-gclid-tester/oidgodfancakeifokbiocnnlfoocmbpd
+
 Chrome extension for checking Cookies needed for Google Ads Conversion tracking
 
 (Google広告のコンバージョン計測に必要なクッキーの計測・テストを行う、Google Chromブラウザの拡張機能(プラグイン)です。)
