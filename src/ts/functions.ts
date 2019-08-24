@@ -24,9 +24,7 @@ export function getUrlWithoutGclid (url) {
  * @param {string} url
  */
 export function getGclid_(url, val) {
-  if(!val){
-    return '';
-  }
+  if(!val) return '';
   return url.includes('?') ? '&gclid='+val : '?gclid='+val; 
 };
 
@@ -50,9 +48,7 @@ export function sendMsgToContentJS(data){
   const $iFrame = document.getElementById('main-iframe') as HTMLIFrameElement;;
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tabID = tabs[0].id;
-    if (!tabID) {
-      return null;
-    }
+    if (!tabID) return null;
     chrome.tabs.sendMessage(tabID, {'message': msg, 'value':val,'gclidVal':gclidVal});
   });
 }
