@@ -1,8 +1,8 @@
 <template>
-  <span id="domain-msg">
+  <span id="domain-msg" >
       <span class="domain-msg">{{msg}}</span>
       <br/>
-      <span class="domain-name" v-if="enabled">{{domain}}</span>
+      <span class="domain-name" :enabled="checked" v-if="checked">{{domain}}</span>
   </span>
 </template>
 
@@ -32,7 +32,7 @@ export default {
     msg: function () {
       return this.isEnabled ? CURRENT_DOMAIN_IS:INSTRUCTION;
     },
-    enabled: function () {
+    checked: function () {
       return this.isEnabled;
     },
     domain: function () {

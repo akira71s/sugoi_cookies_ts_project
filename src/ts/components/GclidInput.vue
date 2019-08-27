@@ -45,7 +45,6 @@ export default {
   },
   mounted: function () {
     this.$data.value = this.getTestDate();
-    console.log('mounted', this.$data.value);
     this.updateVal()
   }
 }

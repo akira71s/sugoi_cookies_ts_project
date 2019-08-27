@@ -1,17 +1,18 @@
 <template>
+  <!-- :enabled="checked" がなければ、computed が　で動かない -->
   <label id="switch-input" class="switch">
-    <input id="toggle" @change="toggle" type="checkbox">
-    <span  class="slider round"></span>
+    <input id="toggle" @change="toggle" type="checkbox" v-model="checked">
+    <span class="slider round"></span>
   </label>
 </template>
 
 <script>
 export default {
   props:{
-    enabled:{
-      type:Boolean,
-      required: false
-    }
+  isEnabled:{
+     type:Boolean,
+     required:false
+   }
   },
   methods:{
     toggle(e){
@@ -21,6 +22,11 @@ export default {
       }
       const isChecked = target['checked'];
       this.$emit('toggle:switch',isChecked);
+    }
+  },
+  computed: {
+    checked: function () {
+      return this.isEnabled;
     }
   }
 }
