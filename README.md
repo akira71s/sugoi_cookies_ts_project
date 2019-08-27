@@ -1,9 +1,14 @@
 @author Akira Sakaguchi <akira.s7171@gmail.com>
 
-# sugoi_cookies
+# sugoi_cookies (Vue.js + TypeScript + Webpack)
+https://chrome.google.com/webstore/detail/sugoicookies-gclid-tester/oidgodfancakeifokbiocnnlfoocmbpd
+
 Chrome extension for checking Cookies needed for Google Ads Conversion tracking
 
 (Google広告のコンバージョン計測に必要なクッキーの計測・テストを行う、Google Chromブラウザの拡張機能(プラグイン)です。)
+
+
+<img width="827" alt="sugoi" src="https://user-images.githubusercontent.com/40524432/60825562-894f5480-a1de-11e9-8448-393bc4d4ba69.PNG">
 
 
 <img width="827" alt="demo" src="https://user-images.githubusercontent.com/40524432/52161436-d7c46880-26ff-11e9-9da6-2be74a386dae.PNG">
@@ -17,35 +22,30 @@ but you don't need to do anymore. What you need to do is just check the console!
 今まではURLの後ろに? or & gclid=... とつけて、デベロッパーツールを開いて、クッキーを探して....
 という作業が必要でしたが、このプラグインを使えば、それがコンソールでできます。)
 
-## JS files (JavaScript ファイル):
-### writer.js
- - JS file to write (console.log) cookie info related to Google Ads conversion tracking
+## TS files (TypeScript ファイル):
 
-### background.js
+### Commons & main 
+#### - app.ts (main file)
+#### - const.ts (common)
+#### - functions.ts (common)
+
+### Contents (files in charge of the page itself)
+#### - content.ts
+#### - writer.ts
+
+### Components
+#### - CoookieMsg.vue
+#### - CustomBtn.vue
+#### - DomainMsg.vue
+#### - Footer.vue
+#### - GclidInput.vue
+#### - SwitchInput.vue
+
+### Background (calling APIs related to cookies)
+#### - background.ts
  - execute clearCookies(chrome.cookies API), then send a message to content JS & writer JS
  
-### popup.js
- - listening events by elements and getting values from the input.
-Then send messages to background JS or content JS for reload / clearCookie 
-
-### const.js
- - constans variables
  
-### content.js
- - receive messages from popup JS & background JS, 
-   then execute reload or send another messageto background JS
-
-## Message Flow
-*testGclid: popup.js: get gclid value and sendMessage to content JS  
-  => content,js: execute reload with / without gclid
-
-*clearCookies: popup.js: sendMessage 
-  => content,js: receive & send message to background.js
-  => background.js: execute chrome.cookie API, then sendResponse to content.js
-  => content.js: console.log() & reload without gcli
-
-// TODO : reload / onload
-
 ## Features(機能):  
 ### 1 Check "_gcl_aw" in the console.(_gcl_aw_クッキーを検出し、コンソールで情報を流します)    
 This is a cookie that plays a very important role for Google Ads and its conversion tracking.  
@@ -87,3 +87,9 @@ By hitting the yellow botton, you can clear _gcl_aw & _gac Cookies in the domain
 By hitting the red botton, you can clear all the cookies you have in the browser.  
 
 (クロームブラウザのすべてのクッキーを削除します。)  
+
+TODO: fix "cookies changed after window loaded" => array cookie vals 
+TODO: fix babel & type ignore
+TODO: fix "switch input v-model" error 
+TODO: deal with fragment in URL => content.ts : reload_, functions.getUrlWithoutGclid
+TODO: nuxt js & vuex
