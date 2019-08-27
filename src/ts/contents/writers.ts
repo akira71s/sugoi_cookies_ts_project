@@ -1,24 +1,23 @@
-import * as CONST from '../const';
-
 /** 
  * @author Akira Sakaguchi <akira.s7171@gmail.com>
  */
-"use strict";
-let gacCache = [];
-let gclawCache = [];
-let gclidCache = [];
+import * as CONST from '../const';
+
+let gacCache:string[] = [];
+let gclawCache:string[] = [];
+let gclidCache:string[] = [];
 
 /** 
  * eventListener - eventListener for chrome.tabs.sendMessage(tabID, obj, function) 
  */
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  let msg = request.message;
-  let val = request.value;
+  let msg:string = request.message;
+  let val:string = request.value;
 
   // from background js
   if(msg=='enabled'){
     start_();
-    let cookies = getCookies(true);
+    let cookies:string[] = getCookies(true);
     write_(cookies, document.domain);
     setTimeout(checkCookies_, 3000);
   
@@ -38,12 +37,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
  * @return {bookean}
  */
 function checkCookies_(){
-  let newCookies = [];
-  let isChanged = false;
-  let cookies = getCookies(false);
-  cookies.forEach((cookie)=>{
-    let name = cookie.split('=')[0];   
-    let value = cookie.split('=')[1];
+  let newCookies:string[] = [];
+  let isChanged:boolean = false;
+  let cookies:string[] = getCookies(false);
+  cookies.forEach((cookie:string)=>{
+    let name:string = cookie.split('=')[0];   
+    let value:string = cookie.split('=')[1];
     if(name.includes('gac')&&!gacCache.includes(value)) {
       isChanged = true;
       newCookies.push(name+'='+value);
@@ -59,7 +58,7 @@ function checkCookies_(){
   });
   if(isChanged){
     console.log("%cCOOKIE CHANGED after windowLoaded", CONST.STYLES_BOLD_RED.join(';'));    
-    newCookies.forEach((cookie)=>{
+    newCookies.forEach((cookie:string)=>{
       add_(cookie);
     });
   }
@@ -103,7 +102,7 @@ function getCookies(isOnload:boolean){
  * calling console log for starter messages
  */
 function start_(){
-  let domain = document.domain;
+  let domain:string = document.domain;
   console.log("%cSUGOI!Cookies for Google Ads (`*・ω・’)" + CONST.VERSION, CONST.STYLE_BOLD);
   console.log("Current domain is : 【", domain ,"】");
 };
@@ -115,15 +114,15 @@ function start_(){
  * @oaram {string} domain
  */
 const write_ =(cookies, domain) =>{
-  let gclAwNm ='_gcl_aw';
-  let gacNm ='_gac';
-  let gclid ='gclid';
+  const GCLAW_NM:string ='_gcl_aw';
+  const GAC_NM:string ='_gac';
+  const GCLID_NM:string ='gclid';
   /** _gal_aw */
-  writeCookies_(cookies, gclAwNm, domain);
+  writeCookies_(cookies, GCLAW_NM, domain);
   /** _gac */ 
-  writeCookies_(cookies, gacNm, domain);
+  writeCookies_(cookies, GAC_NM, domain);
   /** gclid */ 
-  writeCookies_(cookies, gclid, domain);
+  writeCookies_(cookies, GCLID_NM, domain);
 };
 
 /** 
@@ -150,9 +149,9 @@ const writeCVinfo_ =(CVinfo) =>{
  * @oaram {Array.<string>} cookies
  * @oaram {string} domain
  */
-const add_ =(cookie) =>{
-  let name = cookie.split('=')[0];
-  let value = cookie.split('=')[1];
+const add_ =(cookie:string) =>{
+  let name:string = cookie.split('=')[0];
+  let value:string = cookie.split('=')[1];
   console.log(CONST.STYLE_ESCAPE + name + '=' + value, CONST.STYLES_BOLD_WHITE_BG_GREEN.join(';'));
 };
 
@@ -164,9 +163,9 @@ const add_ =(cookie) =>{
  * @param {string} cookieNm
  * @param {string} domain
  */
-function writeCookies_(cookies, cookieNm, domain){
+function writeCookies_(cookies:string[], cookieNm:string, domain:string){
   cookies = cookies.filter((cookie) => {
-    let name = cookie.split('=')[0];
+    let name:string = cookie.split('=')[0];
     return name.includes(cookieNm);
   });
   cookies.length > 0 ?
@@ -181,13 +180,13 @@ function writeCookies_(cookies, cookieNm, domain){
  * @private
  * @param {!string} cookie
  */
-const writeCookieInfo_ = (cookie) =>{
+const writeCookieInfo_ = (cookie:string) =>{
   if(!cookie){
     console.error('parameter invalid');
     return;
   }
-  let name = cookie.split('=')[0];
-  let value = cookie.split('=')[1];
+  let name:string = cookie.split('=')[0];
+  let value:string = cookie.split('=')[1];
   console.log(CONST.STYLE_ESCAPE + name + '=' + value, CONST.STYLES_BOLD_WHITE_BG_GREEN.join(';'));
   chrome.runtime.sendMessage({message:'sendCookie', cookieName: name, cookieValue:value});
 }; 

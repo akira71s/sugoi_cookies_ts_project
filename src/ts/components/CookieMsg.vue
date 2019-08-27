@@ -35,11 +35,12 @@ export default {
     }
   },
   computed: {
-    hasValue: function () {
+    hasValue: function (){
       return this.cookieVal && this.cookieVal!==NO_COOKIE_MSG;
     }
   },
   created: function(){
+    console.log(this.$store);
     this.$emit('get:cookies');
   }
 }

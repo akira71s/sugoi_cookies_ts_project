@@ -4,9 +4,7 @@
  * @param {string} url
  */
 export function getUrlWithoutGclid (url:string):string {
-  if(!url){
-    return;
-  }
+  if(!url) return;
   if(url.includes('?gclid')){
     url = url.substring(url.indexOf('?gclid'),0);
   } else if(url.includes('&gclid')) {
@@ -26,9 +24,7 @@ export function getUrlWithoutGclid (url:string):string {
  * @param {string?} val
  */
 export function getGclid_(url:string, val:string|null) {
-  if(!val){
-    return '';
-  }
+  if(!val) return '';
   return url.includes('?') ? '&gclid='+val : '?gclid='+val; 
 };
 
@@ -45,6 +41,7 @@ export function IsJsonString(str:string) {
   return true;
 };
 
+// TODO: make data class
 export function sendMsgToContentJS(data){
   const msg:string = data.msg;
   const val:string = data.val!=null ? data.val : '';
@@ -52,9 +49,7 @@ export function sendMsgToContentJS(data){
   const $iFrame:HTMLIFrameElement = document.getElementById('main-iframe') as HTMLIFrameElement;;
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tabID = tabs[0].id;
-    if (!tabID) {
-      return null;
-    }
+    if (!tabID) return null;
     chrome.tabs.sendMessage(tabID, {'message': msg, 'value':val,'gclidVal':gclidVal});
   });
 }

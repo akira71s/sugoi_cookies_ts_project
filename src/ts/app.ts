@@ -1,4 +1,10 @@
+// TODO: 
+// this.$store...
+
+import 'babel-polyfill';
 import Vue from 'vue';
+import Vuex from 'vuex';
+
 // @ts-ignore
 import CustomBtn from './components/CustomBtn';
 // @ts-ignore
@@ -7,18 +13,12 @@ import GclidInput from './components/GclidInput';
 import cookieMsg from './components/CookieMsg';
 // @ts-ignore
 import footer from './components/Footer';
+import store from './store';
 import {VERSION} from './const';
 import * as functions from './functions';
 
-const PARENT_URL = "*";
-const NO_COOKIE_MSG='NO COOKIE FOUND';
-
-/**
- * set the version text in the popup menu
- */
-window.addEventListener('DOMContentLoaded',(e)=>{
-  document.getElementById('ver-info').innerText = VERSION;
-});
+const PARENT_URL:string = "*";
+const NO_COOKIE_MSG:string ='NO COOKIE FOUND';
 
 /** 
  * Listening message from content.js & writers.js
@@ -52,6 +52,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 // @clear-all:cookies="clearAll" 
 const app = new Vue({
   el: '#app',
+  store,
   template:
     `<span>
     <div class="second-line">
@@ -62,12 +63,12 @@ const app = new Vue({
     </div>
     <div class="third-line" id="clear-parent">
         <custom-btn parentClass="clear-parent" parentId="clear-parent" btnClass="btn-warning"
-                   btnId="clear" btnLabel="Clear GoogleAds-related Cookies" @click="clear">
+                btnId="clear" btnLabel="Clear GoogleAds-related Cookies" @click="clear">
         </custom-btn>
     </div>
     <div class="forth-line" id="clear-all-parent">
         <custom-btn parentClass="clear-all-parent" parentId="clear-all-parent" btnClass="btn-danger"
-                       btnId="clear-all" btnLabel="Clear All Cookies of This Domain" @click="clearAll">
+                    btnId="clear-all" btnLabel="Clear All Cookies of This Domain" @click="clearAll">
         </custom-btn>
     </div>
     <div class="msgs">
@@ -91,7 +92,9 @@ const app = new Vue({
   },
   data: function(){ 
     return {
-        isEnabled : false,//window.localStorage.getItem('enabled') && window.localStorage.getItem('enabled')=='true'? true : false,
+        isEnabled : false,
+        //window.localStorage.getItem('enabled') && 
+        //  window.localStorage.getItem('enabled')=='true'? true : false,
         inputVal: '',
         gclawVal: NO_COOKIE_MSG,
         gacVal: NO_COOKIE_MSG,
@@ -181,3 +184,10 @@ const app = new Vue({
     // => start with checking if the app is enabeled 
   }
 });
+
+new Vue({
+  el: '#ver-info',
+  data: {
+    message: VERSION
+  }
+})
