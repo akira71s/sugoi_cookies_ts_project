@@ -8,12 +8,6 @@
 
 <script>
 export default {
-  props:{
-  isEnabled:{
-     type:Boolean,
-     required:false
-   }
-  },
   methods:{
     toggle(e){
       const target = e.target;
@@ -22,11 +16,12 @@ export default {
       }
       const isChecked = target['checked'];
       this.$emit('toggle:switch',isChecked);
+      this.$store.commit('isEnabled', !!isChecked);
     }
   },
   computed: {
     checked: function () {
-      return this.isEnabled;
+      return this.$store.getters.isEnabled;
     }
   }
 }

@@ -20,33 +20,6 @@ import {NO_COOKIE_MSG} from './const';
 import appTemplate from './app.template';
 import * as functions from './functions';
 
-/** 
- * Listening message from content.js & writers.js
- */
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  let msg:string = request.message;
-  if(msg==='sendDomainName'){
-    app.$data.domainNm = request.domainName;
-  } else if(msg==='sendCookie'){
-     const cookieName:string = request.cookieName;
-     let cookieValue:string|string[] = request.cookieValue;
-     if(typeof cookieValue !='string' && cookieValue.length > 0){
-       cookieValue = cookieValue[0]
-     }
-     if(cookieName.includes('gcl_aw')){
-      app.$data.gclawVal = cookieValue.length ===0 ?'':cookieValue;
-     } else if (cookieName.includes('gac')){
-      app.$data.gacVal = cookieValue.length ===0 ?'':cookieValue;
-     } else if (cookieName.includes('gclid')){
-      app.$data.gclidVal = cookieValue.length ===0 ?'':cookieValue;
-      if(!app.$data.gclidVal&&window.localStorage.getItem('gclid')){
-        app.$data.gclidVal = window.localStorage.getItem('gclid');
-      }
-     }
-  } 
-  return true;
-});
-
 // @reload="reload"
 // @clear:cookies="clear"
 // @clear-all:cookies="clearAll" 
@@ -62,19 +35,14 @@ const app = new Vue({
   },
   data: function(){ 
     return {
-        isEnabled : false,
         //window.localStorage.getItem('enabled') && 
         //  window.localStorage.getItem('enabled')=='true'? true : false,
         inputVal: '',
-        gclawVal: NO_COOKIE_MSG,
-        gacVal: NO_COOKIE_MSG,
-        gclidVal: NO_COOKIE_MSG,
-        domainNm : ''
     }
    },
    methods:{ 
     reload:function(){
-      if(this.inputVal && this.$data.isEnabled/**TODO*/){
+      if(this.inputVal && this.$store.getters.isEnabled){
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
           const tabID = tabs[0].id;
           if (tabID) {
@@ -95,25 +63,24 @@ const app = new Vue({
     updateInputVal:function(inputVal:string){
       this.$data.inputVal = inputVal;
     },
-    clear:function(inputVal:string){
+    clear:function(){
       this.clearCookieMsgsAndInput_();
       functions.sendMsgToContentJS({'msg':'clearCookies'});
     },
-    clearAll:function(inputVal:string){
+    clearAll:function(){
       this.clearCookieMsgsAndInput_();
       functions.sendMsgToContentJS({'msg':'clearAll'});
     },
     clearCookieMsgsAndInput_:function(){
       this.$refs.gclidInput.emptyInput();
-      this.$data.gclawVal ='';
-      this.$data.gacVal ='';
-      this.$data.gclidVal ='';
+      store.commit('cookie', {cookieValue:'', name:'gclaw'});
+      store.commit('cookie', {cookieValue:'', name:'gac'});
+      store.commit('cookie', {cookieValue:'', name:'gclid'});
     },
     getCookies:function(inputVal:string){
       functions.sendMsgToContentJS({'msg':'getCookies'});
     },
     toggle:function(shouldEnabled:boolean):void{
-      this.$data.isEnabled = shouldEnabled;
       const isEnabledStr = window.localStorage.getItem('enabled');
       const shouldEnabledStr = isEnabledStr && isEnabledStr == 'true'? 'false' : 'true';
       window.localStorage.setItem('enabled', shouldEnabledStr);  
@@ -128,11 +95,7 @@ const app = new Vue({
     checkEnabled:function(){
       const isEnabledStr = window.localStorage.getItem('enabled');
       const isEnabled = isEnabledStr && isEnabledStr=='true'? true : false; 
-      this.setEnabled(isEnabled);
-    },
-    // check if the plugin is enabled on load
-    setEnabled:function(isEnabled){
-      this.$data.isEnabled = isEnabled;
+      this.$store.commit('isEnabled', isEnabled);
     },
     getDomainName:function(){
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -147,9 +110,53 @@ const app = new Vue({
       this.checkEnabled();
       this.getDomainName();
       this.getCookies();
+    },
+    listenMessages_():void {
+      /** Listening message from content.js & writers.js */
+     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+     /** "this" here is window, not the Vue Instance */
+     const store = app.$store;
+     const data = app.$data; 
+     let msg:string = request.message;
+     if(msg==='sendDomainName'){
+        console.log('domain NM!!!!  = ', request);
+        store.commit('domainNm', request.domainNm);
+      } else if(msg==='sendCookie'){
+       const cookieName:string = request.cookieName;
+        let cookieValue:string|string[] = request.cookieValue;
+        if(typeof cookieValue !='string' && cookieValue.length > 0){
+          cookieValue = cookieValue[0]
+        }
+        if(cookieName.includes('gcl_aw')){
+          if(cookieValue.length) {
+            store.commit('cookie', {cookieValue:cookieValue, name:'gclaw'});
+          }
+          data.gclawVal = cookieValue.length ===0 ?'':cookieValue;
+        } else if (cookieName.includes('gac')){
+          if(cookieValue.length){
+            store.commit('cookie', {cookieValue:cookieValue, name:'gac'});
+          }
+          data.gacVal = cookieValue.length ===0 ?'':cookieValue;
+        } else if (cookieName.includes('gclid')){
+          if(cookieValue.length){
+            store.commit('cookie', {cookieValue:cookieValue, name:'gclid'});
+          }
+          data.gclidVal = cookieValue.length ===0 ?'':cookieValue;
+
+          if(!data.gclidVal&&window.localStorage.getItem('gclid')){
+            store.commit('cookie', {cookieValue:cookieValue, name:'gclid'});
+            data.gclidVal = window.localStorage.getItem('gclid');
+          }
+        }
+     } 
+     return true;
+  });
     }
   },
   created:function():void{
     this.start_(); // => start checking if the app is enabeled 
+    this.listenMessages_();  
   }
 });
+
+

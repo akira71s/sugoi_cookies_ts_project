@@ -52,6 +52,7 @@ function checkHttpRequest(requestDetails) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   const msg:string = request.message;
   const domains:string[] = request.domain;
+  console.log('request')
   if(msg==='start'){
      let enabled = isEnabled_();
      updateIcon_(enabled);
@@ -180,7 +181,8 @@ function sendMsg_(msg, val?){
   cache_ = [];
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     if(!tabs[0]){
-      window.alert('please reload the page');
+      // TODO: check when the error occurs
+      // window.alert('please reload the page');
       return;
     }
     // found active tab

@@ -30,6 +30,10 @@ const GAC_NM:string ='_gac';
 const GCLID_NM:string ='gclid';
 const PARENT_URL:string = "*";
 const NO_COOKIE_MSG:string ='NO COOKIE FOUND';
+const DOMAIN_HERE_MSG = 'domain will be shown here'; 
+const CURRENT_DOMAIN_IS = 'Current domain is :'; 
+const INSTRUCTION = "To Enable It & Get Started, Click =>";
+
 
 /** 
  * Google Ads Cookies usually consists of 3 parts: conversionID, timeStamp, and UUID 
@@ -41,4 +45,4 @@ export {VERSION,STYLE_HIGHLIGHT,STYLE_BOLD,STYLE_BLUE,
     STYLE_BG_GRAY,STYLE_ESCAPE,STYLES_BOLD_BULE,STYLES_BOLD_RED,
     STYLES_BOLD_WHITE_BG_GREEN,STYLES_BOLD_WHITE_BG_BLUE,
     STYLES_BOLD_WHITE_BG_ORANGE,STYLES_BOLD_WHITE_BG_GRAY,
-    GCLAW_NM,GAC_NM,GCLID_NM,PARENT_URL,NO_COOKIE_MSG}
+    GCLAW_NM,GAC_NM,GCLID_NM,PARENT_URL,NO_COOKIE_MSG,DOMAIN_HERE_MSG,CURRENT_DOMAIN_IS,INSTRUCTION}

@@ -10,12 +10,13 @@
   },
   "content_scripts": [
     {
+      "memo":  "/** scripts that are used in users' browers */",
       "matches": [ "<all_urls>"],
       "js": ["src/dist/contents.bundle.js","src/dist/writers.bundle.js"]
     }
   ],
   "browser_action": {
-    "name" : "turn on / off",
+    "name" : "turn on/off", 
     "default_title": "SUGOI! Cokkies",
     "default_popup": "src/html/popup.html",
     "default_icon": "icon/s128.png"

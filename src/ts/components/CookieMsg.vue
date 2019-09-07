@@ -4,7 +4,7 @@
           {{name}}
       </span>
       <span v-bind:id="valueId" v-bind:class="[{'cookie-value':true}, {bgGreen:hasValue}]">
-          {{cookieVal}}
+          {{value}}
       </span>
   </div>
 </template>
@@ -14,33 +14,27 @@ const NO_COOKIE_MSG='NO COOKIE FOUND';
 export default {
   props:{
     name :{
-      type:String,
-      required:false
+      type:String, required:false
     },
     valueId:{
-      type:String,
-      required:false
+      type:String, required:false
     },
     compId:{
-      type:String,
-      required:false
+      type:String, required:false
     },
     parentId:{
-      type:String,
-      required:false
-    },
-    cookieVal:{
-      type:Array|String,
-      required:false
+      type:String, required:false
     }
   },
   computed: {
     hasValue: function (){
-      return this.cookieVal && this.cookieVal!==NO_COOKIE_MSG;
+      return this.$store.getters.has(this.name);
+    },
+    value: function (){
+      return this.$store.getters.cookie(this.name);
     }
   },
   mounted: function(){
-    console.log(this.$store);
     this.$emit('get:cookies');
   }
 }

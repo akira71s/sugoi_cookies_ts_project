@@ -16,17 +16,17 @@ const appTemplate = `<span>
         </custom-btn>
     </div>
     <div class="msgs">
-        <cookie-msg ref='gclawMsg' parentId="gclaw-msg" compId="gclaw-name" :cookie-val="gclawVal"
+        <cookie-msg ref='gclawMsg' parentId="gclaw-msg" compId="gclaw-name"
                     valueId="gclaw-value" name="gclaw" @get:cookies="getCookies">
         </cookie-msg>
-        <cookie-msg ref='gacMsg' parentId="gac-msg" compId="gac-name" :cookie-val="gacVal"
+        <cookie-msg ref='gacMsg' parentId="gac-msg" compId="gac-name"
                     valueId="gac-value" name="gac" @get:cookies="getCookies">
         </cookie-msg>
-        <cookie-msg ref='gclidMsg' parentId="gclid-msg" compId="gclid-name" :cookie-val="gclidVal"
+        <cookie-msg ref='gclidMsg' parentId="gclid-msg" compId="gclid-name"
                     valueId="gclid-value" name="gclid" @get:cookies="getCookies">
         </cookie-msg>
     </div>
-    <footer-comp ref="footer" :is-enabled="isEnabled" :domain-nm="domainNm" @toggle="toggle"></footer-comp>
+    <footer-comp ref="footer" @toggle="toggle"></footer-comp>
     </span>`;
 
  export default appTemplate;

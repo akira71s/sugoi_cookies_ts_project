@@ -7,7 +7,7 @@ import {STYLE_ESCAPE,STYLE_BOLD} from "../const";
 
 // start
 chrome.runtime.sendMessage({message:'start'});
-chrome.runtime.sendMessage({message:'sendDomainName',domainName:document.domain}); 
+chrome.runtime.sendMessage({message:'sendDomainName',domainNm:document.domain}); 
 
 /** 
  * eventListener - eventListener for chrome.tabs.sendMessage(tabID, obj, function) 
@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
      break;
 
      case 'getDomainName':
-     chrome.runtime.sendMessage({message:'sendDomainName',domainName:document.domain}); 
+     chrome.runtime.sendMessage({message:'sendDomainName',domainNm:document.domain}); 
      break;
   }
   return true;
