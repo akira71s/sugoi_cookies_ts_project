@@ -29,6 +29,8 @@
     "babel-polyfill": "^6.26.0",
     "clean-css": "^4.2.1",
     "lodash": "^4.17.15",
+    "mixin-deep": "^2.0.1",
+    "set-value": "^3.0.1",
     "vue-class-component": "^7.1.0",
     "vuex": "^3.1.1"
   },
