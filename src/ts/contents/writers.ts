@@ -2,7 +2,6 @@
  * @author Akira Sakaguchi <akira.s7171@gmail.com>
  */
 import * as CONST from '../const';
-
 let gacCache:string[] = [];
 let gclawCache:string[] = [];
 let gclidCache:string[] = [];
@@ -11,8 +10,8 @@ let gclidCache:string[] = [];
  * eventListener - eventListener for chrome.tabs.sendMessage(tabID, obj, function) 
  */
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  let msg:string = request.message;
-  let val:string = request.value;
+  const msg:string = request.message;
+  const val:string = request.value;
 
   // from background js
   if(msg=='enabled'){
@@ -102,7 +101,7 @@ function getCookies(isOnload:boolean){
  * calling console log for starter messages
  */
 function start_(){
-  let domain:string = document.domain;
+  const domain:string = document.domain;
   console.log("%cSUGOI!Cookies for Google Ads (`*・ω・’)" + CONST.VERSION, CONST.STYLE_BOLD);
   console.log("Current domain is : 【", domain ,"】");
 };
@@ -114,15 +113,12 @@ function start_(){
  * @oaram {string} domain
  */
 const write_ =(cookies, domain) =>{
-  const GCLAW_NM:string ='_gcl_aw';
-  const GAC_NM:string ='_gac';
-  const GCLID_NM:string ='gclid';
   /** _gal_aw */
-  writeCookies_(cookies, GCLAW_NM, domain);
+  writeCookies_(cookies, CONST.GCLAW_NM, domain);
   /** _gac */ 
-  writeCookies_(cookies, GAC_NM, domain);
+  writeCookies_(cookies, CONST.GAC_NM, domain);
   /** gclid */ 
-  writeCookies_(cookies, GCLID_NM, domain);
+  writeCookies_(cookies, CONST.GCLID_NM, domain);
 };
 
 /** 

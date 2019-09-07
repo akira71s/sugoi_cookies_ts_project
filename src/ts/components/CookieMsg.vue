@@ -39,7 +39,7 @@ export default {
       return this.cookieVal && this.cookieVal!==NO_COOKIE_MSG;
     }
   },
-  created: function(){
+  mounted: function(){
     console.log(this.$store);
     this.$emit('get:cookies');
   }
