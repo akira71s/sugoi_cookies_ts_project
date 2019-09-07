@@ -12,19 +12,19 @@ import Component from 'vue-class-component';
 
 <script>
 export default {
-  name:'GclidInput',
-   data: function(){ 
+  name:'GclidInput', 
+  data: function(){ 
     return {
         value: ''
     }
-   },
-   methods:{
-     getTestDate:function(){
-       let mm = (new Date().getMonth()+1).toString();
-       mm = mm.length == 1 ? '0' + mm : mm; 
-       let dd = new Date().getDate().toString();
-       dd = dd.toString().length == 1 ? '0'+dd : dd; 
-       return 'test_'+mm+dd;
+  }, 
+  methods:{ 
+    getTestDate:function(){
+        let mm = (new Date().getMonth()+1).toString();
+        mm = mm.length == 1 ? '0' + mm : mm; 
+        let dd = new Date().getDate().toString();
+        dd = dd.toString().length == 1 ? '0'+dd : dd; 
+        return 'test_'+mm+dd;
       },
       handleReload(e){ // :KeyboardEvent
         const val = this.$data.value

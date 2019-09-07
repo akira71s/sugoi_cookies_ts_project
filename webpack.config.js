@@ -7,6 +7,8 @@ module.exports = {
     // メインとなるJavaScriptファイル（エントリーポイント）
     entry: {//"./src/ts/app.ts",
       'dist/app': './src/ts/app.ts',
+      // TODO: better integrated the below into the app.bundle.js? 
+      'dist/version-info': './src/ts/version-info.ts',
       'dist/bg': './src/ts/bg/background.ts',
       'dist/contents': './src/ts/contents/content.ts',
       'dist/writers': './src/ts/contents/writers.ts'

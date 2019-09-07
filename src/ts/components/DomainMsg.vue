@@ -7,36 +7,24 @@
 </template>
 
 <script>
-const DOMAIN_HERE_MSG = 'domain will be shown here'; 
-const CURRENT_DOMAIN_IS = 'Current domain is :'; 
-const INSTRUCTION = "To Enable It & Get Started, Click =>";
-
+import {CURRENT_DOMAIN_IS,INSTRUCTION,DOMAIN_HERE_MSG} from '../const';
 export default {
-  props:{
-    isEnabled:{
-      type:Boolean,
-      required:false
-    },
-    domainNm:{
-      type:String,
-      required:false
-    }
-  },
   methods:{
     toggle:function(shouldEnabled){
-      this.$data.msg = shouldEnabled ? CURRENT_DOMAIN_IS:INSTRUCTION;
-      this.$data.enabled = shouldEnabled;
+      this.$store.commit('msg', shouldEnabled ? CURRENT_DOMAIN_IS:INSTRUCTION);
+      this.$store.commit('isEnabled', shouldEnabled);
     }
   },
   computed: {
     msg: function () {
-      return this.isEnabled ? CURRENT_DOMAIN_IS:INSTRUCTION;
+      return this.$store.getters.isEnabled ? CURRENT_DOMAIN_IS: INSTRUCTION;
     },
     checked: function () {
-      return this.isEnabled;
+      return this.$store.getters.isEnabled;
     },
     domain: function () {
-      return this.domainNm;
+      // TODO: use DOMAIN_HERE_MSG
+      return this.$store.getters.domainNm;
     }
   }
 }
