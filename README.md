@@ -1,6 +1,6 @@
 @author Akira Sakaguchi <akira.s7171@gmail.com>
 
-# sugoi_cookies (Vue.js + TypeScript + Webpack)
+# sugoi_cookies (Vue.js +　Vuex + TypeScript + Webpack)
 https://chrome.google.com/webstore/detail/sugoicookies-gclid-tester/oidgodfancakeifokbiocnnlfoocmbpd
 
 Chrome extension for checking Cookies needed for Google Ads Conversion tracking
