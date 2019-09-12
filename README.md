@@ -5,7 +5,7 @@ https://chrome.google.com/webstore/detail/sugoicookies-gclid-tester/oidgodfancak
 
 Chrome extension for checking Cookies needed for Google Ads Conversion tracking
 
-(Google広告のコンバージョン計測に必要なクッキーの計測・テストを行う、Google Chromブラウザの拡張機能(プラグイン)です。)
+(Google広告のコンバージョン計測に必要なクッキーの計測・テストを行う、Google Chromeブラウザの拡張機能(プラグイン)です。)
 
 
 <img width="827" alt="sugoi" src="https://user-images.githubusercontent.com/40524432/60825562-894f5480-a1de-11e9-8448-393bc4d4ba69.PNG">
